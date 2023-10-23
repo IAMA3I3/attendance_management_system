@@ -20,3 +20,140 @@ body::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: rgb(60, 60, 60); 
 }
+
+/* container */
+.container {
+    padding: 0 5% !important;
+}
+
+
+/* fonts */
+.font-xl {
+    font-size: 2em;
+}
+
+.font-lg {
+    font-size: 1.3em;
+}
+
+.font-sm {
+    font-size: 0.8em;
+}
+
+.light-text {
+    color: rgb(62, 62, 62);
+}
+
+.success-text {
+    color: green;
+    font-weight: bold;
+}
+
+.error-text {
+    color: rgb(255, 38, 0);
+    font-weight: bold;
+}
+
+.info-text {
+    color: rgb(201, 130, 0);
+    font-weight: bold;
+}
+
+
+/* space */
+.mb-xl {
+    margin-bottom: 60px;
+}
+
+.mb-lg {
+    margin-bottom: 24px;
+}
+
+.mb {
+    margin-bottom: 12px;
+}
+
+.py-lg {
+    padding: 24px 0;
+}
+
+.py {
+    padding: 12px 0;
+}
+
+.btw-y *{
+    margin: 4px 0;
+}
+
+/* components */
+select,
+textarea,
+input {
+    position: relative;
+    border: 2px solid rgb(158, 158, 158);
+    border-radius: 8px;
+    padding: 4px 8px;
+    background: transparent;
+    font-size: 1.3em;
+    outline: none;
+}
+
+select:focus,
+textarea:focus,
+input:focus {
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.btn {
+    position: relative;
+    text-decoration: none;
+    margin: 12px 0;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: rgb(185, 0, 185);
+    color: white;
+    transform: scale(1);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.info-message,
+.success-message,
+.error-message {
+    position: relative;
+    margin: 6px 0;
+    background-color: rgba(255, 112, 87, 0.55);
+    box-shadow: 0 0 10px rgb(46, 46, 46);
+    padding: 12px;
+    text-align: center;
+    border-radius: 6px;
+    width: 100%;
+}
+
+.success-message {
+    background-color: rgba(112, 255, 112, 0.516);
+}
+
+.info-message {
+    background-color: rgba(255, 185, 54, 0.511);
+}
+
+@media (min-width: 720px) {
+    .container {
+        padding: 0 10% !important;
+    }
+
+    .font-xl {
+        font-size: 2.2em;
+    }
+
+    .font-lg {
+        font-size: 1.5em;
+    }
+}
