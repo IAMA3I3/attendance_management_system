@@ -11,14 +11,14 @@ require_once "./includes/session_config.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="./assets/gemsIcon.png" type="image/x-icon">
-    <title>Clock In</title>
+    <title>Login | Admin</title>
 </head>
 
 <body>
     <div class="container">
         <!-- feedbacks -->
-        <?php if (isset($_SESSION["clockin_errors"])) { ?>
-            <?php $errors = $_SESSION["clockin_errors"]; ?>
+        <?php if (isset($_SESSION["login_errors"])) { ?>
+            <?php $errors = $_SESSION["login_errors"]; ?>
 
             <?php foreach ($errors as $error) { ?>
                 <div class="error-message">
@@ -31,8 +31,8 @@ require_once "./includes/session_config.php";
             <!--  -->
         <?php } ?>
         <!--  -->
-        <div class="font-lg">CLOCK IN</div>
-        <form class="btw-y" action="./includes/clockin/clockin_inc.php" method="post">
+        <div class="font-lg">ADMIN LOGIN</div>
+        <form class="btw-y" action="./includes/admin_login/login_inc.php" method="post">
             <!--  -->
             <div>
                 <label for="email">Email</label>
@@ -44,18 +44,11 @@ require_once "./includes/session_config.php";
                 <input type="password" name="pwd" id="pwd">
             </div>
             <!--  -->
-            <div>
-                <label for="clockin-time">Clock In Time</label>
-                <input type="text" name="clockin_time" id="clockin-time" value="" disabled>
-            </div>
-            <!--  -->
-            <button type="submit" class="btn">Clock In</button>
+            <button type="submit" class="btn">Login</button>
         </form>
     </div>
-
-    <script src="./js/input_live_time.js"></script>
 </body>
 
 </html>
 
-<?php unset($_SESSION["clockin_errors"]); ?>
+<?php unset($_SESSION["login_errors"]); ?>

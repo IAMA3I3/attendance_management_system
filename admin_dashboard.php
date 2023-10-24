@@ -11,28 +11,25 @@ require_once "./includes/session_config.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="./assets/gemsIcon.png" type="image/x-icon">
-    <title>Dashboard | Technician</title>
+    <title>Dashboard | Admin</title>
 </head>
 
 <body>
     <!--  -->
     <div class="container">
         <!--  -->
-        <?php if (isset($_GET["clockin"]) && $_GET["clockin"] === "success") { ?>
+        <?php if (isset($_GET["login"]) && $_GET["login"] === "success") { ?>
             <div class="success-message">
-                <div class="success-text">Clocked In</div>
+                <div class="success-text">Logged In</div>
             </div>
         <?php } ?>
         <!--  -->
         <div class="font-xl">Dashboard</div>
         <div class="">Logged in as <?php echo $_SESSION["user_first_name"] . " " . $_SESSION["user_last_name"]; ?></div>
-        <form action="./includes/clockout/clockout_inc.php" method="post" onsubmit="return confirm('Do you really want to Clock out?');">
-            <button type="submit" class="btn">Clock Out</button>
-            <div class="font-sm light-text">At <span id="live-time"></span></div>
+        <form action="./includes/admin_logout/logout_inc.php" method="post" onsubmit="return confirm('Do you really want to Log out?');">
+            <button type="submit" class="btn">Logout</button>
         </form>
     </div>
-
-    <script src="./js/display_live_time.js"></script>
 </body>
 
 </html>

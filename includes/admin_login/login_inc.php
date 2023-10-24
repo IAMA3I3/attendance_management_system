@@ -6,11 +6,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     try {
         require_once "../dbh_inc.php";
-        require_once "./clockin_model.php";
-        require_once "./clockin_contr.php";
+        require_once "./login_model.php";
+        require_once "./login_contr.php";
 
-        // check and select user from db
-        $result = select_user($pdo, $email);
+        // check and select admin from db
+        $result = select_admin($pdo, $email);
 
         // handle errors
         $errors = [];
@@ -30,13 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         require_once "../session_config.php";
         if ($errors) {
-            $_SESSION["clockin_errors"] = $errors;
-            header("Location: ../../index.php");
+            $_SESSION["login_errors"] = $errors;
+            header("Location: ../../admin.php");
             die();
         }
-
-        // take attendance
-        take_attendance($pdo, $result["id"]);
 
         $newSessionId = session_create_id();
         $sessionId = $newSessionId . "_" . $result["id"];
@@ -48,16 +45,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $_SESSION["last_regeneration"] = time();
 
-        header("Location: ../../dashboard.php?clockin=success");
+        header("Location: ../../admin_dashboard.php?login=success");
 
         $pdo = null;
         $stmt = null;
 
         die();
+
     } catch (PDOException $e) {
         die("Query failed: " . $e->getMessage());
     }
 } else {
-    header("Location: ../../index.php");
+    header("Location: ../../admin.php");
     die();
 }
