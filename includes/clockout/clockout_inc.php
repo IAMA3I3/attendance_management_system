@@ -6,7 +6,7 @@ require_once "../dbh_inc.php";
 require_once "./clockout_model.php";
 
 // record clockout time
-clock_out($pdo, $_SESSION["user_id"]);
+clock_out($pdo, $_SESSION["user_id"], $_SESSION["last_id"]);
 
 $stmt = null;
 $pdo = null;

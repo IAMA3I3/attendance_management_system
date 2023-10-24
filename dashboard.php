@@ -25,11 +25,14 @@ require_once "./includes/session_config.php";
         <?php } ?>
         <!--  -->
         <div class="font-xl">Dashboard</div>
-        <div class="">Loged in as <?php echo $_SESSION["user_first_name"] . " " . $_SESSION["user_last_name"]; ?></div>
+        <div class="">Logged in as <?php echo $_SESSION["user_first_name"] . " " . $_SESSION["user_last_name"]; ?></div>
         <form action="./includes/clockout/clockout_inc.php" method="post" onsubmit="return confirm('Do you really want to Clock out?');">
             <button type="submit" class="btn">Clock Out</button>
+            <div class="font-sm light-text">At <span id="live-time"></span></div>
         </form>
     </div>
+
+    <script src="./js/display_live_time.js"></script>
 </body>
 
 </html>

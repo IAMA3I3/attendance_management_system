@@ -53,7 +53,7 @@ require_once "./includes/session_config.php";
         </form>
     </div>
 
-    <script src="./js/script.js"></script>
+    <script src="./js/input_live_time.js"></script>
 </body>
 
 </html>

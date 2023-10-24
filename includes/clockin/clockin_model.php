@@ -24,4 +24,8 @@ function take_attendance(object $pdo, int $user_id)
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":user_id", $user_id);
     $stmt->execute();
+
+    $last_id = $pdo->lastInsertId();
+
+    $_SESSION["last_id"] = $last_id;
 }
