@@ -2,7 +2,7 @@ const timeInput = document.querySelector("#clockin-time")
 
 const refreshTime = () => {
     var time = new Date()
-    timeInput.value = `${time.getHours()} : ${time.getMinutes()} : ${time.getSeconds()}`
+    timeInput.value = time.toLocaleTimeString()
 }
 
 setInterval(refreshTime, 1000)

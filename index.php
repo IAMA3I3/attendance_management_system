@@ -16,6 +16,20 @@ require_once "./includes/session_config.php";
 
 <body>
     <div class="container">
+        <!-- feedbacks -->
+        <?php if (isset($_SESSION["login_errors"])) { ?>
+            <?php $errors = $_SESSION["login_errors"]; ?>
+
+            <?php foreach ($errors as $error) { ?>
+                <div class="error-message">
+                    <div class="error-text">
+                        <?php echo $error; ?>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <!--  -->
+        <?php } ?>
         <!--  -->
         <div class="font-lg">CLOCK IN</div>
         <form class="btw-y" action="./includes/clockin/clockin_inc.php" method="post">
@@ -43,3 +57,5 @@ require_once "./includes/session_config.php";
 </body>
 
 </html>
+
+<?php unset($_SESSION["login_errors"]); ?>
