@@ -1,6 +1,11 @@
 <?php
 
 require_once "./includes/session_config.php";
+
+if (!isset($_SESSION["admin_id"])) {
+    header("Location: ./admin.php");
+    die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,11 +35,6 @@ require_once "./includes/session_config.php";
             <?php } ?>
 
             <!--  -->
-        <?php } ?>
-        <?php if (isset($_GET["register"]) && $_GET["register"] === "success") { ?>
-            <div class="success-message">
-                <div class="success-text">Registered Successfully</div>
-            </div>
         <?php } ?>
         <!--  -->
 

@@ -1,6 +1,11 @@
 <?php
 
 require_once "./includes/session_config.php";
+
+if (!isset($_SESSION["user_id"])) {
+    header("Location: ./index.php");
+    die();
+}
 ?>
 
 <!DOCTYPE html>
