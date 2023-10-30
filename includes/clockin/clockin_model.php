@@ -19,12 +19,12 @@ function select_user(object $pdo, string $email)
 // take attendance
 function take_attendance(object $pdo, int $user_id)
 {
-    $status = "present";
-    $query = "INSERT INTO attendance (user_id, user_status) VALUES (:user_id, :user_status)";
+    $register = 1;
+    $query = "INSERT INTO attendance (user_id, register) VALUES (:user_id, :register)";
 
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":user_id", $user_id);
-    $stmt->bindParam(":user_status", $status);
+    $stmt->bindParam(":register", $register);
     $stmt->execute();
 
     $last_id = $pdo->lastInsertId();

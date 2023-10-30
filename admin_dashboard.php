@@ -47,28 +47,38 @@ require_once "./includes/fetch_data/fetch_technicians.php";
             <a href="./register.php" class="btn">Register Technician</a>
         </div>
         <!--  -->
-        <table>
+        <table class="mb">
             <tr class="bold-text">
-                <td>ID No.</td>
+                <td>Staff ID</td>
                 <td>First Name</td>
                 <td>Last Name</td>
                 <td>Site</td>
-                <td>On Duty</td>
                 <td>Status</td>
+                <td></td>
                 <td>More Datails</td>
             </tr>
             <?php foreach ($technicians as $technician) { ?>
                 <tr>
-                    <td><?php echo $technician["id_number"] ?></td>
-                    <td><?php echo $technician["first_name"] ?></td>
-                    <td><?php echo $technician["last_name"] ?></td>
-                    <td><?php echo $technician["site"] ?></td>
-                    <td>On Duty</td>
-                    <td><?php echo $technician["user_status"] ?></td>
-                    <td><a href="#" class="btn">More Details</a></td>
+                    <td><?php echo htmlspecialchars($technician["staff_id"]) ?></td>
+                    <td><?php echo htmlspecialchars($technician["first_name"]) ?></td>
+                    <td><?php echo htmlspecialchars($technician["last_name"]) ?></td>
+                    <td><?php echo htmlspecialchars($technician["site"]) ?></td>
+                    <td><?php echo htmlspecialchars($technician["status"]) ?></td>
+                    <td>
+                        <?php
+                            if (fetch_technician_register($pdo, $technician["id"])) {
+                                echo (fetch_technician_register($pdo, $technician["id"])["register"] == 0) ? '' : 'Present';
+                            }
+                        ?>
+                    </td>
+                    <td><a href="./technician_details.php?technician_id=<?php echo $technician["id"]; ?>" class="btn">More Details</a></td>
                 </tr>
             <?php } ?>
         </table>
+        <!--  -->
+        <div>
+            <a href="./manage_site.php" class="btn">Manage Site</a>
+        </div>
         <!--  -->
         <form action="./includes/admin_logout/logout_inc.php" method="post" onsubmit="return confirm('Do you really want to Log out?');">
             <button type="submit" class="btn">Logout</button>

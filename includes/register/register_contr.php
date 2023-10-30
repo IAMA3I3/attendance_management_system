@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 // empty input
-function empty_input(string $first_name, string $last_name, int $id_number, $dob, $date_employed, $site, string $email, string $pwd, string $confirm_pwd)
+function empty_input(string $first_name, string $last_name, int $staff_id, $dob, $site, string $email, string $pwd, string $confirm_pwd)
 {
-    if (empty($first_name) || empty($last_name) || empty($id_number) || empty($dob) || empty($date_employed) || empty($site) || empty($email) || empty($pwd) || empty($confirm_pwd)) {
+    if (empty($first_name) || empty($last_name) || empty($staff_id) || empty($dob) || empty($site) || empty($email) || empty($pwd) || empty($confirm_pwd)) {
         return true;
     } else {
         return false;
@@ -25,10 +25,10 @@ function not_alpha(string $name)
 }
 
 // id number is registered
-function id_registered(object $pdo, int $id_number)
+function id_registered(object $pdo, int $staff_id)
 {
     // check if id number exist in db
-    if (search_id($pdo, $id_number)) {
+    if (search_id($pdo, $staff_id)) {
         return true;
     } else {
         return false;

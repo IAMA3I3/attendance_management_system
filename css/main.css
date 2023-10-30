@@ -64,6 +64,14 @@ body::-webkit-scrollbar-thumb {
     font-weight: bold;
 }
 
+/* background color */
+.bg-danger {
+    background-color: tomato !important;
+}
+.bg-primary {
+    background-color: blue !important;
+}
+
 
 /* space */
 .mb-xl {
@@ -101,6 +109,11 @@ input {
     background: transparent;
     font-size: 1.3em;
     outline: none;
+}
+
+textarea {
+    resize: none;
+    height: 60px;
 }
 
 select:focus,

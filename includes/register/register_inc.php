@@ -3,13 +3,19 @@
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $first_name = $_POST["first_name"];
     $last_name = $_POST["last_name"];
-    $id_number = (int)$_POST["id_number"];
+    $staff_id = (int)$_POST["staff_id"];
     $dob = $_POST["dob"];
-    $date_employed = $_POST["date_employed"];
     $site = $_POST["site"];
     $email = $_POST["email"];
     $pwd = $_POST["pwd"];
     $confirm_pwd = $_POST["confirm_pwd"];
+
+    $passport = $_FILES["passport"];
+    $passport_name = $_FILES["passport"]["name"];
+    $passport_tmp_name = $_FILES["passport"]["tmp_name"];
+    $passport_size = $_FILES["passport"]["size"];
+    $passport_error = $_FILES["passport"]["error"];
+    $passport_type = $_FILES["passport"]["type"];
 
     try {
         require_once "../dbh_inc.php";
@@ -19,8 +25,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // handle errors
         $errors = [];
 
+        $passport_ext = explode(".", $passport_name);
+        $passport_act_ext = strtolower(end($passport_ext));
+
+        $allowed = ["jpg", "jpeg", "png"];
+
+        if (in_array($passport_act_ext, $allowed)) {
+            if ($passport_error === 0) {
+                if ($passport_size < 1000000) {
+                    $passport_new_name = uniqid('', true) . "." . $passport_act_ext;
+                    $passport_dest = "../../uploads/".$passport_new_name;
+                    move_uploaded_file($passport_tmp_name, $passport_dest);
+                } else {
+                    $errors["large_size"] = "Passport size is too large";
+                }
+            } else {
+                $errors["upload_error"] = "Error uploading passport";
+            }
+        } else {
+            $errors["invalid_type"] = "Passport type is not allowed";
+        }
+
         // empty input
-        if (empty_input($first_name, $last_name, $id_number, $dob, $date_employed, $site, $email, $pwd, $confirm_pwd)) {
+        if (empty_input($first_name, $last_name, $staff_id, $dob, $site, $email, $pwd, $confirm_pwd)) {
             $errors["empty_input"] = "All fields are required";
         }
         // first name must be letters only
@@ -32,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $errors["last_name_not_alpha"] = "Last name must be letters only";
         }
         // id number is registered
-        if (id_registered($pdo, $id_number)) {
+        if (id_registered($pdo, $staff_id)) {
             $errors["id_registered"] = "ID number is already registered";
         }
         // email is invalid
@@ -59,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $input_data = [
                 "first_name" => $first_name,
                 "last_name" => $last_name,
-                "id_number" => $id_number,
+                "staff_id" => $staff_id,
                 "dob" => $dob,
                 "date_employed" => $date_employed,
                 "site" => $site,
@@ -71,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         // register user
-        add_user($pdo, $first_name, $last_name, $id_number, $dob, $date_employed, $site, $email, $pwd);
+        add_user($pdo, $first_name, $last_name, $staff_id, $dob, $site, $email, $pwd, $passport_new_name);
 
         header("Location: ../../admin_dashboard.php?register=success");
 

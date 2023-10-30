@@ -30,8 +30,10 @@ if (!isset($_SESSION["user_id"])) {
         <?php } ?>
         <!--  -->
         <div class="font-xl">Dashboard</div>
+        <!--  -->
         <div class="">Logged in as <?php echo $_SESSION["user_first_name"] . " " . $_SESSION["user_last_name"]; ?></div>
-        <form action="./includes/clockout/clockout_inc.php" method="post" onsubmit="return confirm('Do you really want to Clock out?');">
+        <!--  -->
+        <form action="./includes/clockout/clockout_inc.php" method="post" onsubmit="return confirm('You will not be able to clock in until after 24 hours of last clock in, Do you really want to Clock out now?');">
             <button type="submit" class="btn">Clock Out</button>
             <div class="font-sm light-text">At <span id="live-time"></span></div>
         </form>

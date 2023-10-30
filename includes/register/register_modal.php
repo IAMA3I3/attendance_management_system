@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 // check if id number exist in db
-function search_id(object $pdo, int $id_number)
+function search_id(object $pdo, int $staff_id)
 {
-    $query = "SELECT * FROM users WHERE id_number = :id_number;";
+    $query = "SELECT * FROM users WHERE staff_id = :staff_id;";
 
     $stmt = $pdo->prepare($query);
-    $stmt->bindParam(":id_number", $id_number);
+    $stmt->bindParam(":staff_id", $staff_id);
     $stmt->execute();
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -31,9 +31,9 @@ function search_email(object $pdo, string $email)
 }
 
 // register user
-function add_user(object $pdo, string $first_name, string $last_name, int $id_number, $dob, $date_employed, $site, string $email, string $pwd)
+function add_user(object $pdo, string $first_name, string $last_name, int $staff_id, $dob, $site, string $email, string $pwd, string $passport)
 {
-    $query = "INSERT INTO users (first_name, last_name, id_number, dob, date_employed, site, email, pwd) VALUES (:first_name, :last_name, :id_number, :dob, :date_employed, :site, :email, :pwd);";
+    $query = "INSERT INTO users (first_name, last_name, staff_id, dob, site, email, pwd, passport, status) VALUES (:first_name, :last_name, :staff_id, :dob, :site, :email, :pwd, :passport, 'Active');";
 
     $stmt = $pdo->prepare($query);
 
@@ -44,12 +44,12 @@ function add_user(object $pdo, string $first_name, string $last_name, int $id_nu
 
     $stmt->bindParam(":first_name", $first_name);
     $stmt->bindParam(":last_name", $last_name);
-    $stmt->bindParam(":id_number", $id_number);
+    $stmt->bindParam(":staff_id", $staff_id);
     $stmt->bindParam(":dob", $dob);
-    $stmt->bindParam(":date_employed", $date_employed);
     $stmt->bindParam(":site", $site);
     $stmt->bindParam(":email", $email);
     $stmt->bindParam(":pwd", $hashedPwd);
+    $stmt->bindParam(":passport", $passport);
 
     $stmt->execute();
 }

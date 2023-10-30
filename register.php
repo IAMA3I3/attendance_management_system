@@ -6,6 +6,9 @@ if (!isset($_SESSION["admin_id"])) {
     header("Location: ./admin.php");
     die();
 }
+
+require_once "./includes/dbh_inc.php";
+require_once "./includes/fetch_data/fetch_site_options.php";
 ?>
 
 <!DOCTYPE html>
@@ -39,8 +42,13 @@ if (!isset($_SESSION["admin_id"])) {
         <!--  -->
 
         <!--  -->
+        <div class="mb"></div>
+        <div class="mb">
+            <a href="./admin_dashboard.php" class="btn">Home</a>
+        </div>
+        <!--  -->
         <div class="font-lg">REGISTER TECHNICIAN</div>
-        <form class="btw-y" action="./includes/register/register_inc.php" method="post">
+        <form class="btw-y" action="./includes/register/register_inc.php" method="post" enctype="multipart/form-data">
             <!--  -->
             <div>
                 <label for="first-name">First Name</label>
@@ -61,11 +69,11 @@ if (!isset($_SESSION["admin_id"])) {
             </div>
             <!--  -->
             <div>
-                <label for="id-number">ID Number</label>
-                <?php if (isset($_SESSION["input_data"]["id_number"]) && !isset($_SESSION["register_errors"]["id_registered"])) { ?>
-                    <input type="number" name="id_number" id="id-number" value="<?php echo $_SESSION["input_data"]["id_number"]; ?>">
+                <label for="staff-id">Staff ID</label>
+                <?php if (isset($_SESSION["input_data"]["staff_id"]) && !isset($_SESSION["register_errors"]["id_registered"])) { ?>
+                    <input type="number" name="staff_id" id="staff-id" value="<?php echo $_SESSION["input_data"]["staff_id"]; ?>">
                 <?php } else { ?>
-                    <input type="number" name="id_number" id="id-number">
+                    <input type="number" name="staff_id" id="staff-id">
                 <?php } ?>
             </div>
             <!--  -->
@@ -79,24 +87,20 @@ if (!isset($_SESSION["admin_id"])) {
             </div>
             <!--  -->
             <div>
-                <label for="date-employed">Date Employed</label>
-                <?php if (isset($_SESSION["input_data"]["date_employed"])) { ?>
-                    <input type="date" name="date_employed" id="date-employed" value="<?php echo $_SESSION["input_data"]["date_employed"] ?>">
-                    <?php } else { ?>
-                <input type="date" name="date_employed" id="date-employed">
-                <?php } ?>
-            </div>
-            <!--  -->
-            <div>
                 <label for="site">Site</label>
                 <select name="site" id="site">
                     <option value=""></option>
-                    <option value="gemsarena">Gems Arena</option>
-                    <option value="gemscitygate">Gems City Gate</option>
-                    <option value="gemscmd">Gems CMD</option>
-                    <option value="gemsrock">Gems Rock</option>
-                    <option value="gemstower">Gems Tower</option>
+                    <?php foreach ($site_options as $site_option) { ?>
+                        <option value="<?php echo htmlspecialchars($site_option["site_name"]) ?>">
+                            <?php echo htmlspecialchars($site_option["site_name"]) ?>
+                        </option>
+                    <?php } ?>
                 </select>
+            </div>
+            <!--  -->
+            <div>
+                <label for="passport">Passport</label>
+                <input type="file" name="passport" id="passport">
             </div>
             <!--  -->
             <div>
