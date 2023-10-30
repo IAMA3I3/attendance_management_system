@@ -181,6 +181,20 @@ table tr td {
     background-color: rgba(255, 185, 54, 0.511);
 }
 
+
+/* pop-up */
+#pop-up {
+    position: relative;
+    transform: translateY(0px);
+    opacity: 1;
+    transition: .6s;
+}
+
+#pop-up.swipe-off {
+    transform: translateY(-300px);
+    opacity: 0;
+}
+
 @media (min-width: 720px) {
     .container {
         padding: 0 10% !important;
