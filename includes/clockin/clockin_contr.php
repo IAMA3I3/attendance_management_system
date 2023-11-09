@@ -34,3 +34,14 @@ function wrong_pwd(string $pwd, string $hashedPwd)
         return false;
     }
 }
+
+// already clocked in today
+function clockedin_today(bool|array $day)
+{
+    if ($day) {
+        return true;
+    } else {
+        return false;
+    }
+    
+}

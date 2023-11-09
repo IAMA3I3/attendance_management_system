@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // check and select user from db
         $result = select_user($pdo, $email);
+        $day = is_same_day($pdo, date("d"), $result["id"]);
 
         // handle errors
         $errors = [];
@@ -27,6 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (!wrong_email($result) && wrong_pwd($pwd, $result["pwd"]) && !empty_input($email, $pwd)) {
             $errors["wrong_info"] = "Incorrect login info!";
         }
+        // already clocked in today
+        if (clockedin_today($day) && !empty_input($email, $pwd)) {
+            $errors["clockedin_today"] = "Can't clockin twice in a day";
+        }
 
         require_once "../session_config.php";
         if ($errors) {
@@ -34,6 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location: ../../index.php");
             die();
         }
+
+        // update login time
+        update_login_time($pdo, date("d"), $result["id"]);
 
         // take attendance
         take_attendance($pdo, $result["id"]);
@@ -43,8 +51,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         session_id($sessionId);
 
         $_SESSION["user_id"] = $result["id"];
-        $_SESSION["user_last_name"] = htmlspecialchars($result["last_name"]);
-        $_SESSION["user_first_name"] = htmlspecialchars($result["first_name"]);
+        // $_SESSION["user_last_name"] = htmlspecialchars($result["last_name"]);
+        // $_SESSION["user_first_name"] = htmlspecialchars($result["first_name"]);
+        $_SESSION["user"] = $result;
 
         $_SESSION["last_regeneration"] = time();
 

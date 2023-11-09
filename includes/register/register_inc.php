@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // register user
         add_user($pdo, $first_name, $last_name, $staff_id, $dob, $site, $email, $pwd, $passport_new_name);
 
-        header("Location: ../../admin_dashboard.php?register=success");
+        header("Location: ../../register.php?register=success");
 
         $stmt = null;
         $pdo = null;

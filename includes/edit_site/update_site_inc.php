@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ];
             $_SESSION["add_site_data"] = $add_site_data;
 
-            header("Location: ../../manage_site.php");
+            header("Location: ../../manage_site.php?edit=true");
             die();
         }
 

@@ -15,45 +15,60 @@ require_once "./includes/session_config.php";
 </head>
 
 <body>
-    <div class="container">
-        <!-- feedbacks -->
-        <?php if (isset($_SESSION["clockin_errors"])) { ?>
-            <?php $errors = $_SESSION["clockin_errors"]; ?>
+    <div class="form-page">
+        <!-- bg -->
+        <img src="./assets/login.jpg" alt="" class="bg">
 
-            <?php foreach ($errors as $error) { ?>
-                <div class="error-message">
-                    <div class="error-text">
-                        <?php echo $error; ?>
-                    </div>
+
+        <div class="form-card-container">
+            <div class="form-card">
+                <!--  -->
+                <div class="logo mb">
+                    <img src="./assets/gemsLogo.png" alt="">
                 </div>
-            <?php } ?>
+                <!--  -->
+                <div class="font-lg mb">CLOCK IN</div>
+                <!-- feedbacks -->
+                <?php if (isset($_SESSION["clockin_errors"])) { ?>
+                    <?php $errors = $_SESSION["clockin_errors"]; ?>
 
-            <!--  -->
-        <?php } ?>
-        <!--  -->
-        <div class="font-lg">CLOCK IN</div>
-        <form class="btw-y" action="./includes/clockin/clockin_inc.php" method="post">
-            <!--  -->
-            <div>
-                <label for="email">Email</label>
-                <input type="text" name="email" id="email">
+                    <?php foreach ($errors as $error) { ?>
+                        <div class="error-message" id="pop-up">
+                            <div class="error-text">
+                                <?php echo $error; ?>
+                            </div>
+                        </div>
+                    <?php } ?>
+
+                    <!--  -->
+                <?php } ?>
+                <!--  -->
+
+                <form class="btw-y" action="./includes/clockin/clockin_inc.php" method="post">
+                    <!--  -->
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email">
+                    </div>
+                    <!--  -->
+                    <div>
+                        <label for="pwd">Password</label>
+                        <input type="password" name="pwd" id="pwd">
+                    </div>
+                    <!--  -->
+                    <div>
+                        <label for="clockin-time">Clock In Time</label>
+                        <input type="text" name="clockin_time" id="clockin-time" value="" disabled>
+                    </div>
+                    <!--  -->
+                    <button type="submit" class="btn">Clock In</button>
+                </form>
             </div>
-            <!--  -->
-            <div>
-                <label for="pwd">Password</label>
-                <input type="password" name="pwd" id="pwd">
-            </div>
-            <!--  -->
-            <div>
-                <label for="clockin-time">Clock In Time</label>
-                <input type="text" name="clockin_time" id="clockin-time" value="" disabled>
-            </div>
-            <!--  -->
-            <button type="submit" class="btn">Clock In</button>
-        </form>
+        </div>
     </div>
 
     <script src="./js/input_live_time.js"></script>
+    <script src="./js/pop-up.js"></script>
 </body>
 
 </html>

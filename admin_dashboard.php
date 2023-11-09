@@ -10,6 +10,7 @@ if (!isset($_SESSION["admin_id"])) {
 require_once "./includes/dbh_inc.php";
 require_once "./includes/fetch_data/fetch_technicians_model.php";
 require_once "./includes/fetch_data/fetch_technicians.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -33,9 +34,13 @@ require_once "./includes/fetch_data/fetch_technicians.php";
                     <!--  -->
                     <a class="nav active" href="#"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
                     <!--  -->
+                    <a class="nav" href="./permission_grant.php"><i class="fa-solid fa-message"></i><span>Permission Grant</span></a>
+                    <!--  -->
                     <a class="nav" href="./register.php"><i class="fa-solid fa-user-plus"></i><span>Register Technician</span></a>
                     <!--  -->
                     <a class="nav" href="./manage_site.php"><i class="fa-solid fa-screwdriver-wrench"></i><span>Manage Site</span></a>
+                    <!--  -->
+                    <a class="nav" href="./manage_permissions.php"><i class="fa-solid fa-person-walking-arrow-loop-left"></i><span>Manage Permissions</span></a>
                     <!--  -->
                     <form class="" action="./includes/admin_logout/logout_inc.php" method="post" onsubmit="return confirm('Do you really want to Log out?');">
                         <button type="submit" class=""><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
@@ -54,45 +59,67 @@ require_once "./includes/fetch_data/fetch_technicians.php";
                 </div>
             <?php } ?>
             <!--  -->
-            <?php if (isset($_GET["register"]) && $_GET["register"] === "success") { ?>
-                <div class="success-message" id="pop-up">
-                    <div class="success-text">Registered Successfully</div>
-                </div>
-            <?php } ?>
             <!--  -->
+            <div class="mb-lg"></div>
             <div class="font-xl">Dashboard</div>
             <!--  -->
-            <div class="mb">Logged in as <?php echo $_SESSION["admin_first_name"] . " " . $_SESSION["admin_last_name"]; ?></div>
+            <div class="mb"><?php echo $_SESSION["admin_first_name"] . " " . $_SESSION["admin_last_name"]; ?></div>
 
             <!--  -->
-            <table class="mb">
-                <tr class="bold-text">
-                    <td>Staff ID</td>
-                    <td>First Name</td>
-                    <td>Last Name</td>
-                    <td>Site</td>
-                    <td>Status</td>
-                    <td></td>
-                    <td>More Datails</td>
-                </tr>
-                <?php foreach ($technicians as $technician) { ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($technician["staff_id"]) ?></td>
-                        <td><?php echo htmlspecialchars($technician["first_name"]) ?></td>
-                        <td><?php echo htmlspecialchars($technician["last_name"]) ?></td>
-                        <td><?php echo htmlspecialchars($technician["site"]) ?></td>
-                        <td><?php echo htmlspecialchars($technician["status"]) ?></td>
-                        <td>
-                            <?php
-                            if (fetch_technician_register($pdo, $technician["id"])) {
-                                echo (fetch_technician_register($pdo, $technician["id"])["register"] == 0) ? '' : 'Present';
-                            }
-                            ?>
-                        </td>
-                        <td><a href="./technician_details.php?technician_id=<?php echo $technician["id"]; ?>" class="btn">More Details</a></td>
+            <div class="card">
+                <!--  -->
+                <div class="font-lg mb">TECHNICIANS</div>
+
+                <!--  -->
+                <table class="mb">
+                    <tr class="bold-text">
+                        <td>Staff ID</td>
+                        <td>Name</td>
+                        <td>Site</td>
+                        <td>Status</td>
+                        <td>Clock In</td>
+                        <td>Clock Out</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
-                <?php } ?>
-            </table>
+                    <?php foreach ($technicians as $technician) { ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($technician["staff_id"]) ?></td>
+                            <td><?php echo htmlspecialchars($technician["first_name"]) . " " . htmlspecialchars($technician["last_name"]) ?></td>
+                            <td><?php echo htmlspecialchars($technician["site"]) ?></td>
+                            <td><?php echo htmlspecialchars($technician["status"]) ?></td>
+                            <td>
+                                <?php
+                                if (fetch_technician_register($pdo, $technician["id"])) {
+                                    echo fetch_technician_register($pdo, $technician["id"])["date"] . " " . fetch_technician_register($pdo, $technician["id"])["clockin"];
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                if (fetch_technician_register($pdo, $technician["id"]) && fetch_technician_register($pdo, $technician["id"])["clockout"] !== "0000-00-00 00:00:00") {
+                                    echo fetch_technician_register($pdo, $technician["id"])["clockout"];
+                                }
+                                ?>
+                            </td>
+                            <td class="success-text font-sm">
+                                <?php
+                                if (fetch_technician_register($pdo, $technician["id"])) {
+                                    echo (fetch_technician_register($pdo, $technician["id"])["register"] == 0) ? '' : 'Present';
+                                }
+                                ?>
+                            </td>
+                            <td class="font-lg"><a title="More Details" href="./technician_details.php?technician_id=<?php echo $technician["id"]; ?>"><i class="fa-solid fa-circle-info"></i></a></td>
+                            <td>
+                                <form action="" method="post">
+                                    <button title="Edit" class="ic-btn font-lg" type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </div>
         </div>
     </div>
 

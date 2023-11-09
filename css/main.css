@@ -1,24 +1,28 @@
 /* body */
-*{
+* {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     background-color: rgb(224, 224, 224);
     width: 100%;
     overflow-x: hidden;
     cursor: default;
+    /* height: 200vh; */
 }
+
 body::-webkit-scrollbar {
     border-radius: 32px;
     width: 8px;
-    background-color: rgb(133, 133, 133); 
+    background-color: rgb(133, 133, 133);
 }
+
 body::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: rgb(60, 60, 60); 
+    background-color: rgb(60, 60, 60);
 }
 
 /* container */
@@ -30,6 +34,7 @@ body::-webkit-scrollbar-thumb {
 /* fonts */
 .font-xl {
     font-size: 2em;
+    letter-spacing: 1px;
 }
 
 .font-lg {
@@ -49,6 +54,13 @@ body::-webkit-scrollbar-thumb {
     font-weight: bold;
 }
 
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+
 .success-text {
     color: green;
     font-weight: bold;
@@ -64,12 +76,29 @@ body::-webkit-scrollbar-thumb {
     font-weight: bold;
 }
 
+.primary-text {
+    color: blue;
+}
+
+.white-text {
+    color: white;
+}
+
 /* background color */
 .bg-danger {
     background-color: tomato !important;
 }
+
 .bg-primary {
-    background-color: blue !important;
+    background-color: rgb(22,154,188) !important;
+}
+
+.bg-light {
+    background-color: rgb(96, 96, 96) !important;
+}
+
+.bg-success {
+    background-color: rgb(0, 203, 0) !important;
 }
 
 
@@ -94,8 +123,16 @@ body::-webkit-scrollbar-thumb {
     padding: 12px 0;
 }
 
-.btw-y *{
+.w-150-px {
+    width: 150px !important;
+}
+
+.btw-y * {
     margin: 4px 0;
+}
+
+.flex-1 {
+    flex: 1;
 }
 
 /* components */
@@ -109,6 +146,14 @@ input {
     background: transparent;
     font-size: 1.3em;
     outline: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
 }
 
 textarea {
@@ -127,23 +172,26 @@ table {
     border-collapse: collapse;
 }
 
-table tr {
-    border-top: 2px solid rgb(131, 131, 131);
-    border-bottom: 2px solid rgb(131, 131, 131);
-}
+/* table tr {
+    border-top: 2px solid rgb(161, 161, 161);
+    border-bottom: 2px solid rgb(161, 161, 161);
+} */
 
 table tr:nth-child(odd) {
-    background-color: rgb(192, 192, 192);
+    background-color: rgb(222, 222, 222);
 }
 
 table tr td {
-    padding: 12px 6px;
+    padding: 12px;
 }
 
+.btn-outline-danger,
+.btn-outline-success,
+.btn-outline,
 .btn {
     position: relative;
     text-decoration: none;
-    margin: 12px 0;
+    margin: 12px 0px;
     text-transform: uppercase;
     font-size: 1.2em;
     padding: 6px 12px;
@@ -156,6 +204,42 @@ table tr td {
     transform: scale(1);
 }
 
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid rgb(185, 0, 185);
+    color: rgb(185, 0, 185);
+}
+
+.btn-outline-success {
+    background-color: transparent;
+    border: 2px solid rgb(0, 206, 0);
+    color: rgb(0, 206, 0);
+}
+
+.btn-outline-danger {
+    background-color: transparent;
+    border: 2px solid rgb(198, 30, 0);
+    color: rgb(198, 30, 0);
+}
+
+.btn-outline:hover {
+    background-color: rgb(185, 0, 185);
+    color: white;
+}
+
+.btn-outline-success:hover {
+    background-color: rgb(0, 206, 0);
+    color: white;
+}
+
+.btn-outline-danger:hover {
+    background-color: rgb(198, 30, 0);
+    color: white;
+}
+
+.btn-outline-danger:active,
+.btn-outline-success:active,
+.btn-outline:active,
 .btn:active {
     transform: scale(0.95);
 }
@@ -165,22 +249,132 @@ table tr td {
 .error-message {
     position: relative;
     margin: 6px 0;
-    background-color: rgba(255, 112, 87, 0.55);
+    background-color: rgb(255, 162, 146);
     box-shadow: 0 0 10px rgb(46, 46, 46);
     padding: 12px;
     text-align: center;
     border-radius: 6px;
     width: 100%;
+    z-index: 1000;
 }
 
 .success-message {
-    background-color: rgba(112, 255, 112, 0.516);
+    background-color: rgb(179, 255, 179);
 }
 
 .info-message {
-    background-color: rgba(255, 185, 54, 0.511);
+    background-color: rgba(255, 230, 183)
 }
 
+.card {
+    position: relative;
+    background-color: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 8px rgb(74, 74, 74);
+}
+.ic-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.img-container {
+    position: relative;
+    width: 120px;
+    height: auto;
+    border: 4px solid rgb(0, 0, 0, 0.8);
+    background-color: rgb(0, 0, 0, 0.8);
+    overflow: hidden;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: auto; */
+}
+.img-container img {
+    width: 100%;
+}
+
+/*  */
+.form-page {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+.form-page .bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.form-card-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-card-container .form-card {
+    position: relative;
+    padding: 24px;
+    border-radius: 24px;
+    background: linear-gradient(60deg, rgb(255, 255, 255, 0.8), rgb(255, 255, 255, 0.4), rgb(255, 255, 255, 0.8));
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    text-align: center;
+}
+
+.form-card-container .form-card .logo {
+    position: relative;
+    width: 200px;
+    display: inline-block;
+}
+
+.form-card-container .form-card .logo img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.form-card input {
+    border: 2px solid rgb(67, 67, 67);
+    width: 300px;
+}
+
+.form-card input:focus {
+    border: 2px solid purple;
+}
+
+.form-card form div * {
+    display: block;
+    text-align: left;
+}
+
+
+/*  */
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.space-btw {
+    justify-content: space-between;
+}
+.space-around {
+    justify-content: space-around;
+}
+.gap {
+    gap: 12px;
+}
+.gap-lg {
+    gap: 24px;
+}
+.gap-xl {
+    gap: 60px;
+}
 
 /* pop-up */
 #pop-up {
@@ -193,6 +387,15 @@ table tr td {
 #pop-up.swipe-off {
     transform: translateY(-300px);
     opacity: 0;
+}
+
+/* loading */
+.loading-container {
+    width: 100px;
+}
+.loading-container img {
+    width: 100%;
+    object-fit: contain;
 }
 
 @media (min-width: 720px) {

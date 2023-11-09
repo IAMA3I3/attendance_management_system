@@ -2,7 +2,7 @@
 
 try {
     //fetch_site_options
-    $query = "SELECT * FROM site_options";
+    $query = "SELECT * FROM site_options;";
     $stmt = $pdo->prepare($query);
     $stmt->execute();
 

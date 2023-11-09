@@ -1,0 +1,84 @@
+.pop-form-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 0%;
+    height: 0vh;
+    opacity: 0;
+    overflow: hidden;
+    background: rgb(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transition: .2s;
+}
+
+.pop-form-container.pop {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    opacity: 1;
+    margin-top: 0px;
+    margin-left: 0px;
+}
+
+.pop-form {
+    position: relative;
+    padding: 24px;
+    background: linear-gradient(60deg, rgb(0, 0, 0, 0.9), rgb(0, 0, 0, 0.7), rgb(0, 0, 0, 0.9));
+    border-radius: 12px;
+    box-shadow: 0px 0px 8px rgb(41, 41, 41);
+    color: white;
+    text-align: center;
+}
+
+
+.pop-form div * {
+    display: block;
+    text-align: left;
+}
+
+.pop-form textarea,
+.pop-form input {
+    color: white;
+}
+
+.pop-form textarea:focus,
+.pop-form input:focus {
+    border: 2px solid purple;
+}
+
+.pop-form .close {
+    position: absolute;
+    top: 12px;
+    right: 0px;
+    font-size: 1.4em;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: white;
+}
+
+.pop-form .close:active {
+    transform: scale(0.95);
+}
+
+
+
+
+
+
+
+@media (min-width: 720px) {
+
+    /*  */
+    .pop-form textarea,
+    .pop-form input {
+        width: 400px;
+        margin-bottom: 12px;
+    }
+}

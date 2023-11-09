@@ -2,7 +2,9 @@
 
 try {
     // fetch technician details
-    $user_id = $_GET["technician_id"];
+    if (isset($_GET["technician_id"])) {
+        $user_id = $_GET["technician_id"];
+    }
 
     $technician_details = fetch_technician_with_attendance($pdo, $user_id);
 

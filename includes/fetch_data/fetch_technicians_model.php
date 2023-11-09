@@ -19,7 +19,7 @@ function fetch_all_technicians(object $pdo)
 // fetch technician register
 function fetch_technician_register(object $pdo, $user_id)
 {
-    $query = "SELECT register FROM attendance WHERE user_id = :user_id ORDER BY id DESC;";
+    $query = "SELECT * FROM attendance WHERE user_id = :user_id ORDER BY id DESC;";
 
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":user_id", $user_id);
@@ -30,3 +30,18 @@ function fetch_technician_register(object $pdo, $user_id)
 
     return $result;
 }
+
+// fetch register date time
+// function fetch_technician_register(object $pdo, $user_id)
+// {
+//     $query = "SELECT register FROM attendance WHERE user_id = :user_id ORDER BY id DESC;";
+
+//     $stmt = $pdo->prepare($query);
+//     $stmt->bindParam(":user_id", $user_id);
+
+//     $stmt->execute();
+
+//     $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+//     return $result;
+// }
