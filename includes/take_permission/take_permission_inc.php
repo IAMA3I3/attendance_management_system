@@ -29,7 +29,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         // send permission
-        send_permission($pdo, $user_id, $permission, $duration);
+        if ($permission === "other") {
+            send_permission($pdo, $user_id, $other_reason, $duration, 1);
+        } else {
+            send_permission($pdo, $user_id, $permission, $duration, 0);
+        }
+        
+        // send_permission($pdo, $user_id, $permission, $duration);
 
         header("Location: ../../take_permission.php?take_permission=success");
 

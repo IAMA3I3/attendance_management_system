@@ -135,6 +135,10 @@ body::-webkit-scrollbar-thumb {
     flex: 1;
 }
 
+.display-none {
+    display: none;
+}
+
 /* components */
 select,
 textarea,

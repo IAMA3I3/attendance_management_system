@@ -9,10 +9,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // set is read
         is_read($pdo, $permission_id);
-        // accept permission
-        accept_permission($pdo, $permission_id, date('H:i:s'));
+        // decline permission
+        decline_permission($pdo, $permission_id);
 
-        header("Location: ../../permission_grant.php?permission=accept");
+        header("Location: ../../permission_grant.php?permission=decline");
 
         $stmt = null;
         $pdo = null;

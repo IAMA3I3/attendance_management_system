@@ -17,7 +17,19 @@ require_once "./includes/take_permission/take_permission_model.php";
 // fetch permission state
 $current_permission = fetch_last_permission($pdo, $_SESSION["user_id"]);
 
-$_SESSION["permission_state"] = $current_permission["permission_state"];
+if ($current_permission) {
+    $_SESSION["permission_state"] = $current_permission["permission_state"];
+}
+
+if ($current_permission && $current_permission["permission_state"] === "end") {
+    unset($_SESSION["permission_state"]);
+}
+
+if ($current_permission && $current_permission["permission_state"] === "decline") {
+    unset($_SESSION["permission_state"]);
+    $_GET["permission"] = "decline";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -76,14 +88,41 @@ $_SESSION["permission_state"] = $current_permission["permission_state"];
                     </div>
                 <?php } ?>
                 <!--  -->
+                <?php if (isset($_GET["end_permission"]) && $_GET["end_permission"] === "true") { ?>
+                    <div class="success-message" id="pop-up">
+                        <div class="success-text">Welcome Back</div>
+                    </div>
+                <?php } ?>
+                <!--  -->
+                <?php if (isset($_GET["end_permission"]) && $_GET["end_permission"] === "late") { ?>
+                    <div class="error-message" id="pop-up">
+                        <div class="error-text">You Are Late!</div>
+                    </div>
+                <?php } ?>
+                <!--  -->
+                <?php if (isset($_GET["permission"]) && $_GET["permission"] === "decline") { ?>
+                    <div class="error-message" id="pop-up">
+                        <div class="error-text">Permission Denied</div>
+                    </div>
+                <?php } ?>
+                <!--  -->
                 <div class="mb-lg"></div>
                 <?php if (isset($_SESSION["permission_state"]) && $_SESSION["permission_state"] === "sent") { ?>
-                    <div class="font-xl mb-lg">Wait For Response</div>
+                    <div class="font-xl mb-xl">Wait For Response</div>
+                    <div class="mb-xl"></div>
                     <div class="loading-container">
                         <img src="./assets/loading.gif" alt="">
                     </div>
                 <?php } else if (isset($_SESSION["permission_state"]) && $_SESSION["permission_state"] === "accept") { ?>
                     <div class="font-xl mb-lg">Permission Granted</div>
+                    <div class="mb-xl"></div>
+                    <div class="display-none" id="timer-up"><?php echo (((new DateTime(date('H:i:s')))->diff((new DateTime($current_permission["time_start"])))->format('%H:%i:%s'))) ?></div>
+                    <div class="font-xl" id="show-timer"></div>
+                    <div class="mb-xl"></div>
+                    <form class="display-none" action="./includes/end_permission/end_permission_inc.php" method="post" id="back-form">
+                        <input type="hidden" name="permission_id" id="permission-id" value="<?php echo $current_permission["id"] ?>">
+                        <button type="submit" class="btn">I'm Back</button>
+                    </form>
                 <?php } else { ?>
                     <div class="font-xl mb-lg">Take Permission</div>
                     <!--  -->
@@ -111,10 +150,10 @@ $_SESSION["permission_state"] = $current_permission["permission_state"];
                             <label for="duration">Duration</label>
                             <select name="duration" id="duration">
                                 <option value=""></option>
-                                <option value="5_less">5min or less</option>
-                                <option value="6_15">6min - 15min</option>
-                                <option value="16_30">16min - 30min</option>
-                                <option value="31_1">31min - 1hr</option>
+                                <option value="5min or less">5min or less</option>
+                                <option value="6min - 15min">6min - 15min</option>
+                                <option value="16min - 30min">16min - 30min</option>
+                                <option value="31min - 1hr">31min - 1hr</option>
                             </select>
                         </div>
                         <!--  -->
@@ -126,9 +165,10 @@ $_SESSION["permission_state"] = $current_permission["permission_state"];
     </div>
 
     <script src="https://kit.fontawesome.com/ecdfbd10f7.js" crossorigin="anonymous"></script>
-    <script src="./js/display_live_time.js"></script>
+    <!-- <script src="./js/display_live_time.js"></script> -->
     <script src="./js/side-nav.js"></script>
     <script src="./js/pop-up.js"></script>
+    <script src="./js/timer-up.js"></script>
 </body>
 
 </html>

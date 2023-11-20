@@ -3,16 +3,17 @@
 declare(strict_types= 1);
 
 // send permission
-function send_permission(object $pdo, $user_id, string $permission, string $duration)
+function send_permission(object $pdo, $user_id, string $permission, string $duration, $is_other)
 {
     $permission_state = "sent";
-    $query = "INSERT INTO take_permission (user_id, permission_text, duration, permission_state) VALUES (:user_id, :permission_text, :duration, :permission_state);";
+    $query = "INSERT INTO take_permission (user_id, permission_text, duration, permission_state, is_other) VALUES (:user_id, :permission_text, :duration, :permission_state, :is_other);";
 
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":user_id", $user_id);
     $stmt->bindParam(":permission_text", $permission);
     $stmt->bindParam(":duration", $duration);
     $stmt->bindParam(":permission_state", $permission_state);
+    $stmt->bindParam(":is_other", $is_other);
     $stmt->execute();
 }
 
