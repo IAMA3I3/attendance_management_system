@@ -10,9 +10,18 @@ let now = new Date()
 
 let setTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), ...timeDiff)
 
+function pad(val) {
+    var valString = val + "";
+    if (valString.length < 2) {
+        return "0" + valString;
+    } else {
+        return valString;
+    }
+}
+
 const increase = () => {
     setTime.setSeconds(setTime.getSeconds() + 1)
-    showTimer.innerHTML = setTime.getHours() + ":" + setTime.getMinutes() + ":" + setTime.getSeconds()
+    showTimer.innerHTML = pad(setTime.getHours()) + ":" + pad(setTime.getMinutes()) + ":" + pad(setTime.getSeconds())
 }
 
 const displayBackForm = () => {

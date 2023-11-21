@@ -70,67 +70,105 @@ require_once "./includes/fetch_data/fetch_permission_requests.php";
             <div class="mb-lg"></div>
             <div class="font-xl mb-lg">Permission Grant</div>
             <!--  -->
-            <div class="font-lg mb">REQUESTS</div>
-            <?php foreach ($permission_requests as $permission_request) { ?>
-                <?php if ($permission_request["is_read"] == 0) { ?>
-                    <div class="card mb-lg">
-                        <div class="flex space-btw">
-                            <div class="">
-                                <div class="mb-sm"><?php echo htmlspecialchars($permission_request["first_name"]) . " " . htmlspecialchars($permission_request["last_name"]) ?></div>
-                                <div class="font-sm light-text mb"><?php echo htmlspecialchars($permission_request["created_at"]) ?></div>
-                                <div class="mb font-lg"><?php echo ($permission_request["is_other"] == 1) ? "<span class='bold-text'>Other: </span>" : "" ?><?php echo htmlspecialchars($permission_request["permission_text"]) ?></div>
-                                <div class="mb"><span class="bold-text">Duration:</span> <?php echo htmlspecialchars($permission_request["duration"]) ?></div>
-                            </div>
-                            <div class="">
-                                <form action="./includes/permission_request/accept_permission_request_inc.php" method="post">
-                                    <input type="hidden" name="permission_id" id="permission-id" value="<?php echo $permission_request["id"]; ?>">
-                                    <button type="submit" class="btn-outline-success w-150-px"><i class="fa-solid fa-check"></i> Accept</button>
-                                </form>
-                                <form action="./includes/permission_request/decline_permission_request.php" method="post">
-                                    <input type="hidden" name="permission_id" id="permission-id" value="<?php echo $permission_request["id"]; ?>">
-                                    <button type="submit" class="btn-outline-danger w-150-px"><i class="fa-solid fa-xmark"></i> Decline</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            <?php } ?>
+            <div class="card">
+                <div class="font-lg mb">REQUESTS</div>
+                <table class="mb">
+                    <tr class="bold-text">
+                        <td>Technician</td>
+                        <td>Sent At</td>
+                        <td>Permission</td>
+                        <td>Duration</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <?php foreach ($permission_requests as $permission_request) { ?>
+                        <?php if ($permission_request["is_read"] == 0) { ?>
+                            <tr>
+                                <td>
+                                    <div class=""><?php echo htmlspecialchars($permission_request["first_name"]) . " " . htmlspecialchars($permission_request["last_name"]) ?></div>
+                                </td>
+                                <td>
+                                    <div class="font-sm light-text"><?php echo htmlspecialchars($permission_request["created_at"]) ?></div>
+                                </td>
+                                <td>
+                                    <div class=""><?php echo ($permission_request["is_other"] == 1) ? "<span class='bold-text'>Other: </span>" : "" ?><?php echo htmlspecialchars($permission_request["permission_text"]) ?></div>
+                                </td>
+                                <td>
+                                    <div class=""><span class="bold-text">Duration:</span> <?php echo htmlspecialchars($permission_request["duration"]) ?></div>
+                                </td>
+                                <td>
+                                    <form action="./includes/permission_request/accept_permission_request_inc.php" method="post">
+                                        <input type="hidden" name="permission_id" id="permission-id" value="<?php echo $permission_request["id"]; ?>">
+                                        <button type="submit" class="btn-outline-success w-150-px"><i class="fa-solid fa-check"></i> Accept</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="./includes/permission_request/decline_permission_request.php" method="post">
+                                        <input type="hidden" name="permission_id" id="permission-id" value="<?php echo $permission_request["id"]; ?>">
+                                        <button type="submit" class="btn-outline-danger w-150-px"><i class="fa-solid fa-xmark"></i> Decline</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    <?php } ?>
+                </table>
+            </div>
             <div class="mb-lg"></div>
             <!--  -->
-            <div class="font-lg mb">PERMISSIONS</div>
-            <?php foreach ($permission_requests as $permission_request) { ?>
-                <?php if ($permission_request["is_read"] == 1) { ?>
-                    <div class="card mb-lg">
-                        <div class="flex space-btw">
-                            <div class="">
-                                <div class="mb-sm"><?php echo htmlspecialchars($permission_request["first_name"]) . " " . htmlspecialchars($permission_request["last_name"]) ?></div>
-                                <div class="font-sm light-text mb"><?php echo htmlspecialchars($permission_request["created_at"]) ?></div>
-                                <div class="mb font-lg"><?php echo ($permission_request["is_other"] == 1) ? "<span class='bold-text'>Other: </span>" : "" ?><?php echo htmlspecialchars($permission_request["permission_text"]) ?></div>
-                                <div class="display-none" id="timer-up"><?php echo (((new DateTime(date('H:i:s')))->diff((new DateTime($permission_request["time_start"])))->format('%H:%i:%s'))) ?></div>
-                                <div class="mb"><span class="bold-text">Duration:</span> <?php echo htmlspecialchars($permission_request["duration"]) ?>
-                                    <?php if ($permission_request["permission_grant"] == 1 && $permission_request["permission_state"] === "accept") { ?>
-                                        | <span class="" id="show-timer"></span>
+            <div class="card mb-lg">
+                <div class="font-lg mb">PERMISSIONS</div>
+                <table class="mb">
+                    <tr class="bold-text">
+                        <td>Technician</td>
+                        <td>Sent At</td>
+                        <td>Permission</td>
+                        <td>Duration</td>
+                        <td>Overtime</td>
+                        <td>Status</td>
+                    </tr>
+                    <?php foreach ($permission_requests as $permission_request) { ?>
+                        <?php if ($permission_request["is_read"] == 1) { ?>
+                            <tr>
+                                <td>
+                                    <div class=""><?php echo htmlspecialchars($permission_request["first_name"]) . " " . htmlspecialchars($permission_request["last_name"]) ?></div>
+                                </td>
+                                <td>
+                                    <div class="font-sm light-text"><?php echo htmlspecialchars($permission_request["created_at"]) ?></div>
+                                </td>
+                                <td>
+                                    <div class=""><?php echo ($permission_request["is_other"] == 1) ? "<span class='bold-text'>Other: </span>" : "" ?><?php echo htmlspecialchars($permission_request["permission_text"]) ?></div>
+                                </td>
+                                <td>
+                                    <div class="display-none" id="timer-up"><?php echo (((new DateTime(date('H:i:s')))->diff((new DateTime($permission_request["time_start"])))->format('%H:%i:%s'))) ?></div>
+                                    <div class=""><?php echo htmlspecialchars($permission_request["duration"]) ?>
+                                        <?php if ($permission_request["permission_grant"] == 1 && $permission_request["permission_state"] === "accept") { ?>
+                                            | <span class="" id="show-timer"></span>
+                                        <?php } ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <?php if ($permission_request["overtime"] && $permission_request["overtime"] != "00:00:00") { ?>
+                                        <div class="error-text">+ <?php echo $permission_request["overtime"] ?></div>
                                     <?php } ?>
-                                </div>
-                                <?php if ($permission_request["overtime"] && $permission_request["overtime"] != "00:00:00") { ?>
-                                    <div class="mb error-text"><span class="bold-text">Overtime: </span> + <?php echo $permission_request["overtime"] ?></div>
-                                <?php } ?>
-                                <?php if ($permission_request["overtime"] && $permission_request["overtime"] == "00:00:00") { ?>
-                                    <div class="mb success-text"><span class="bold-text">Overtime: </span> + <?php echo $permission_request["overtime"] ?></div>
-                                <?php } ?>
-                            </div>
-                            <div class="">
-                                <?php if ($permission_request["permission_grant"] == 1) { ?>
-                                    <div class="success-text"><i class="fa-solid fa-check"></i> Accepted <?php echo ($permission_request["permission_state"] === "accept") ? " | In Progress" : "" ?></div>
-                                <?php } ?>
-                                <?php if ($permission_request["permission_grant"] == 0) { ?>
-                                    <div class="error-text"><i class="fa-solid fa-xmark"></i> Declined</div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            <?php } ?>
+                                    <?php if ($permission_request["overtime"] && $permission_request["overtime"] == "00:00:00") { ?>
+                                        <div class="success-text">+ <?php echo $permission_request["overtime"] ?></div>
+                                    <?php } ?>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <?php if ($permission_request["permission_grant"] == 1) { ?>
+                                            <div class="success-text"><i class="fa-solid fa-check"></i><?php echo ($permission_request["permission_state"] === "accept") ? "In Progress" : "Accepted" ?></div>
+                                        <?php } ?>
+                                        <?php if ($permission_request["permission_grant"] == 0) { ?>
+                                            <div class="error-text"><i class="fa-solid fa-xmark"></i> Declined</div>
+                                        <?php } ?>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    <?php } ?>
+                </table>
+            </div>
         </div>
     </div>
 

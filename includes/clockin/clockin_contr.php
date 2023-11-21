@@ -45,3 +45,15 @@ function clockedin_today(bool|array $day)
     }
     
 }
+
+// inactive account
+function inactive_account(object $pdo, string $email)
+{
+    // check if innactive
+    if (check_inactive($pdo, $email)) {
+        return true;
+    } else {
+        return false;
+    }
+    
+}

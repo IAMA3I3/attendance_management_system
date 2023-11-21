@@ -58,3 +58,22 @@ function is_same_day(object $pdo, $current_time, $user_id)
 
     return $result;
 }
+
+// check if innactive
+function check_inactive(object $pdo, string $email)
+{
+    $query = "SELECT * FROM users WHERE email = :email";
+
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":email", $email);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result["status"] == "Inactive") {
+        return true;
+    } else {
+        return false;
+    }
+    
+}

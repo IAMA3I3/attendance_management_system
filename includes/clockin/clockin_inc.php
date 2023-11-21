@@ -32,6 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (clockedin_today($day) && !empty_input($email, $pwd)) {
             $errors["clockedin_today"] = "Can't clockin twice in a day";
         }
+        // inactive account
+        if (inactive_account($pdo, $email)) {
+            $errors["inactive_account"] = "This account is inactive";
+        }
 
         require_once "../session_config.php";
         if ($errors) {

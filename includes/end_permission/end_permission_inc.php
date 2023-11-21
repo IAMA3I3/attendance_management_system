@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 break;
             
             case '5min or less':
-                $max_time = "00:5:00";
+                $max_time = "00:05:00";
                 break;
             
             default:
@@ -41,8 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $time_start = new DateTime($permission["time_start"]);
         $time_stop = new DateTime($permission["time_stop"]);
         $time_diff = $time_start->diff($time_stop);
-        $time_spent = $time_diff->format("%H:%i:%s");
-        echo $time_spent . "<br>";
+        $time_d = $time_diff->format("%H:%i:%s");
+        $time_arr = explode(":", $time_d);
+        $time_form = new DateTime("$time_arr[0]:$time_arr[1]:$time_arr[2]");
+        $time_spent = date_format($time_form,"H:i:s");
+        // echo $time_spent . "<br>";
         // update overtime
         $overtime = "00:00:00";
         if ($max_time < $time_spent) {
