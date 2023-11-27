@@ -39,7 +39,7 @@ require_once "./includes/fetch_data/fetch_permissions.php";
                     <!--  -->
                     <a class="nav" href="./manage_site.php"><i class="fa-solid fa-screwdriver-wrench"></i><span>Manage Site</span></a>
                     <!--  -->
-                    <a class="nav active" href="#"><i class="fa-solid fa-person-walking-arrow-loop-left"></i><span>Manage Permissions</span></a>
+                    <a class="nav active" href="./manage_permissions.php"><i class="fa-solid fa-person-walking-arrow-loop-left"></i><span>Manage Permissions</span></a>
                     <!--  -->
                     <form class="" action="./includes/admin_logout/logout_inc.php" method="post" onsubmit="return confirm('Do you really want to Log out?');">
                         <button type="submit" class=""><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>

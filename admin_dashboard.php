@@ -35,7 +35,7 @@ require_once "./includes/fetch_data/fetch_site_options.php";
             <div class="side-bar">
                 <div class="navs">
                     <!--  -->
-                    <a class="nav active" href="#"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
+                    <a class="nav active" href="./dashboard.php"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
                     <!--  -->
                     <a class="nav" href="./permission_grant.php"><i class="fa-solid fa-message"></i><span>Permission Grant</span></a>
                     <!--  -->

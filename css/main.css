@@ -103,6 +103,10 @@ body::-webkit-scrollbar-thumb {
 
 
 /* space */
+.m-auto {
+    margin: 0 auto !important;
+}
+
 .mb-xl {
     margin-bottom: 60px;
 }

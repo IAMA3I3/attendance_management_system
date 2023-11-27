@@ -21,11 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $errors["empty_input"] = "All fields are required!";
         }
         // wrong email
-        if (wrong_email($result) && !empty_input($email, $pwd)) {
+        if (!empty_input($email, $pwd) && wrong_email($result)) {
             $errors["wrong_info"] = "Incorrect login info!";
         }
         // wrong password
-        if (!wrong_email($result) && wrong_pwd($pwd, $result["pwd"]) && !empty_input($email, $pwd)) {
+        if (!empty_input($email, $pwd) && !wrong_email($result) && wrong_pwd($pwd, $result["pwd"])) {
             $errors["wrong_info"] = "Incorrect login info!";
         }
         // already clocked in today

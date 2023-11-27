@@ -54,7 +54,11 @@ if ($current_permission && $current_permission["permission_state"] === "decline"
                     <!--  -->
                     <a class="nav" href="./dashboard.php"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
                     <!--  -->
-                    <a class="nav active" href="#"><i class="fa-solid fa-person-walking-arrow-loop-left"></i><span>Take Permission</span></a>
+                    <a class="nav active" href="./take_permission.php"><i class="fa-solid fa-person-walking-arrow-loop-left"></i><span>Take Permission</span></a>
+                    <!--  -->
+                    <a class="nav" href="./permission_history.php"><i class="fa-solid fa-clock-rotate-left"></i><span>Permission History</span></a>
+                    <!--  -->
+                    <a class="nav" href="./change_pwd.php"><i class="fa-solid fa-unlock-keyhole"></i><span>Change Password</span></a>
                     <!--  -->
                 </div>
             </div>

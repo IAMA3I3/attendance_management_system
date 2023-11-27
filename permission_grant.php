@@ -34,7 +34,7 @@ require_once "./includes/fetch_data/fetch_permission_requests.php";
                     <!--  -->
                     <a class="nav" href="./admin_dashboard.php"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
                     <!--  -->
-                    <a class="nav active" href="#"><i class="fa-solid fa-message"></i><span>Permission Grant</span></a>
+                    <a class="nav active" href="./permission_grant.php"><i class="fa-solid fa-message"></i><span>Permission Grant</span></a>
                     <!--  -->
                     <a class="nav" href="./register.php"><i class="fa-solid fa-user-plus"></i><span>Register Technician</span></a>
                     <!--  -->

@@ -36,7 +36,7 @@ require_once "./includes/fetch_data/fetch_site_options.php";
                     <!--  -->
                     <a class="nav" href="./register.php"><i class="fa-solid fa-user-plus"></i><span>Register Technician</span></a>
                     <!--  -->
-                    <a class="nav active" href="#"><i class="fa-solid fa-screwdriver-wrench"></i><span>Manage Site</span></a>
+                    <a class="nav active" href="./manage_site.php"><i class="fa-solid fa-screwdriver-wrench"></i><span>Manage Site</span></a>
                     <!--  -->
                     <a class="nav" href="./manage_permissions.php"><i class="fa-solid fa-person-walking-arrow-loop-left"></i><span>Manage Permissions</span></a>
                     <!--  -->

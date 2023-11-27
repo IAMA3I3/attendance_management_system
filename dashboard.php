@@ -27,9 +27,13 @@ if (!isset($_SESSION["user_id"])) {
             <div class="side-bar">
                 <div class="navs">
                     <!--  -->
-                    <a class="nav active" href="#"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
+                    <a class="nav active" href="./dashboard.php"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
                     <!--  -->
                     <a class="nav" href="./take_permission.php"><i class="fa-solid fa-person-walking-arrow-loop-left"></i><span>Take Permission</span></a>
+                    <!--  -->
+                    <a class="nav" href="./permission_history.php"><i class="fa-solid fa-clock-rotate-left"></i><span>Permission History</span></a>
+                    <!--  -->
+                    <a class="nav" href="./change_pwd.php"><i class="fa-solid fa-unlock-keyhole"></i><span>Change Password</span></a>
                     <!--  -->
                 </div>
             </div>
